@@ -31,6 +31,7 @@
 | Concurrency & race conditions | — | |
 | Code organization & structure (small files) | — | |
 | Reading & explaining code | — | |
+| Prompting & steering (getting non-slop AI output) | — | |
 | Testing & debugging | — | |
 | Deployment & operations | — | |
 

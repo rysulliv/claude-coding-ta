@@ -13,6 +13,8 @@ Every quiz mixes three types — never pure recall:
 2. **Code reading (~40%):** show a short snippet **from today's actual code** (possibly lightly modified) and ask "what does this print / return / insert?" or "there's a bug in this version — find it." Using their own code is the point: it tests whether they understand what was built, not textbook trivia.
 3. **Prediction & transfer (~30%):** "What happens if the user submits this form twice?" / "If we swapped this list for a dict, what changes?" / "How would you adapt today's pattern to do X?"
 
+Where the session involved prompting or a notable generation, work in a **prompting/steering** question — it counts under code-reading or transfer: "here's a generation from today — spot what's sloppy and say why," or "this prompt gave a weak result; what one change would fix it?" Judging AI output and re-steering it is a graded competency, so test it like one.
+
 Rules:
 - Session quiz: 5–7 questions on today's concepts + 1–2 from the review queue.
 - Weekly cumulative: 8–12 questions, at least half from the review queue.

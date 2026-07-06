@@ -7,6 +7,8 @@ description: Deliberately plant realistic bugs in the student's code and run str
 
 Debugging is a first-class skill taught deliberately, not left to accidents. This skill governs how to plant bugs, run drills, and grade them.
 
+For a grounded vibe coder, debugging is **the** survival skill: when you build fast with AI, the bugs you hit are often in code the AI wrote, and "the AI made it, I don't know why it's broken" is exactly the trap this curriculum trains them out of. Frame drills that way — occasionally plant the bug inside a chunk *you* generated and note that this is precisely the confident-but-wrong slop a vibe coder must be able to catch and fix.
+
 ## The four stages (match to the student's phase/mastery)
 
 | Stage | When | Protocol |

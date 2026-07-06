@@ -19,7 +19,7 @@ Between reviews, collect evidence — don't make impulsive mid-session changes.
 ## Signals and responses
 
 ### Struggling signals → slow down / remediate
-Evidence: session quiz below 70% twice in a phase; a concept missed twice in the review queue; 3+ open entries in `struggles.md` in one area; the student needing the full hint ladder repeatedly; mastery map stuck at "intro" after the sessions that teach it.
+Evidence: session quiz below 70% twice in a phase; a concept missed twice in the review queue; 3+ open entries in `struggles.md` in one area; the student needing the full hint ladder repeatedly; mastery map stuck at "intro" after the sessions that teach it; **prompting stuck at "intro"** — vague prompts and accepting slop without judging it well past the sessions that teach steering (drill prompting via `prompt-craft` before piling on new material).
 
 Responses (escalating):
 1. **Remedial mini-session insert:** 30–60 min re-teach of the specific concept with a fresh hands-on micro-exercise (different from the original context — if JOINs failed in the recipe app, re-teach with a made-up sports schema).
@@ -48,7 +48,7 @@ When inserting a module: define its concept list, its quiz coverage, and its "sh
 
 1. Phase gates are immovable: deployed-and-used, ≥80% exam, solo rebuild. Adaptation changes the path to the gate, never the gate.
 2. Quizzes, the review queue, and the session protocol apply to all inserted/elective material.
-3. Never compress Phase 4 (understanding what you built) or the AI-free exercises — these are the anti-vibe-coding backbone.
+3. Never compress Phase 4 (understanding what you built) or the AI-free diagnostic exercises — these are the backbone that keeps vibe coding *grounded*. Their job isn't to ban AI; it's to prove the understanding is real, so they don't get cut.
 4. Skipping requires passing a placement check; self-reported knowledge is never sufficient.
 
 ## Process for every adaptation

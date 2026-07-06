@@ -4,7 +4,7 @@
 
 > 📊 **Start here — the visual roadmap:** **[View the course roadmap slides](https://rysulliv.github.io/claude-coding-ta/curriculum-roadmap.pdf)**. It maps out the whole journey at a glance and opens right in your browser. **Skim it first** to see the big picture, then keep it handy and revisit the slides for each phase as you reach it — it pairs with the step-by-step [Day 0 setup](#day-0--get-set-up-start-here) below. *(Also in this repo at [`docs/curriculum-roadmap.pdf`](docs/curriculum-roadmap.pdf).)*
 
-This isn't a course you watch. It's a personal mentor that lives inside your code editor and teaches you to build software the way a great senior engineer would teach a junior: in small steps, making sure you *understand and can read every line* before moving on, quizzing you so it sticks, and refusing to just "vibe-code" the app for you. The goal is that **you** become the developer.
+This isn't a course you watch. It's a personal mentor that lives inside your code editor and teaches you to build software the way developers actually work today — **fast, with AI doing a lot of the typing** — while making sure you genuinely *understand, can read, and can debug every line* that ships. It quizzes you so it sticks, and it coaches you to prompt the AI like a pro so you get senior-quality results instead of a mess you can't fix. This is **grounded vibe coding**: build fast, understand deeply, ship no slop. The goal is that **you** become the developer in the driver's seat.
 
 You don't need to know anything about coding, GitHub, or the command line to start. The setup below assumes you've never used any of them.
 
@@ -24,7 +24,7 @@ You don't need to know anything about coding, GitHub, or the command line to sta
 
 ## What you'll learn
 
-The priority isn't memorizing Python syntax — it's understanding how real software works and being able to **read and explain any code in front of you**. By the end you'll genuinely understand:
+The priority isn't memorizing Python syntax — it's understanding how real software works, being able to **read and explain any code in front of you**, and **prompting AI well enough to get great results**. By the end you'll genuinely understand:
 
 - **Programming basics** — Python, functions, data, loops, errors.
 - **How the web works** — frontend vs. backend, HTTP requests, APIs.
@@ -32,8 +32,9 @@ The priority isn't memorizing Python syntax — it's understanding how real soft
 - **AI features** — calling models, structured output, tool use.
 - **Real-world systems** — authentication, security, caching, race conditions, and how to keep code organized so files stay small and readable.
 - **Shipping & operating** — deploying to the internet, reading logs, debugging production, and taking payments.
+- **Driving the AI** — writing prompts that get high-quality code, spotting when the AI produces junk, and steering it to something you'd be proud to ship.
 
-Writing code from scratch comes gradually — early on you'll mostly read, predict, and modify code; by the later phases you'll be writing whole pieces yourself.
+You'll build fast with AI from day one — that's the point. Writing code fully from scratch comes gradually too: early on you'll mostly read, predict, steer, and modify code; by the later phases you'll write whole pieces yourself, on purpose, to prove you really *own* what you're shipping.
 
 ---
 
@@ -92,7 +93,7 @@ Each phase ends with something **deployed and used by a real person** (a friend 
 - 3.13–3.15 — Build weeks (closed beta with friends)
 
 ### [Phase 4 — Understanding What You Built](curriculum/ai-developer-curriculum.md#phase-4--understanding-what-you-built-weeks-1718) · Weeks 17–18
-*Go down the stack and fill the gaps that vibe-coding hides.*
+*Go down the stack until the parts the AI usually handles stop being magic — so you can debug anything.*
 - 4.1 — What actually happens on a request
 - 4.2 — Python under the hood (async, imports)
 - 4.3 — Database internals (indexes, transactions)
@@ -187,7 +188,7 @@ Every session follows the same loop, on purpose:
 
 1. **Catch up** — your mentor reads your progress files and greets you with where you left off and a couple of warm-up questions.
 2. **Plan** — you say today's goal in your own words and sketch the approach before any code is written.
-3. **Build in small steps** — never a giant wall of generated code. New concepts get named and explained in plain English, and your job is to *understand every line* — reading it back, predicting what it does, and modifying it (and writing more of it yourself as you progress).
+3. **Build — you drive, the AI types** — often you'll prompt your mentor to build a whole piece at once (that's a real skill you're learning). New concepts get named and explained in plain English first, and your job is to *understand every line before it's accepted* — reading it back, predicting what it does, steering a weak result into a good one, and modifying it (and writing more of it yourself as you progress). Nothing gets committed that you can't explain.
 4. **Walk through it** — you trace how the code actually runs, out loud.
 5. **Quiz** — a short quiz so today's concepts stick; the ones that don't come back later via spaced repetition.
 6. **Commit & save** — you write the commit message, summarize what changed, and save your work (details below).
@@ -230,6 +231,7 @@ That's it. Your mentor reads your progress files, reminds you where you left off
 - **`.claude/skills/`** — the detailed playbooks for running sessions, quizzes, bug drills, and adjusting pace.
 - **[`curriculum/ai-developer-curriculum.md`](curriculum/ai-developer-curriculum.md)** — the full 5-phase curriculum, start to finish.
 - **`progress/`** — your mentor's memory: what you've learned, decided, and struggled with, plus your review queue and quiz log. These fill in as you go and are what make each session continuous.
+- **`webapp/`** — your **companion dashboard**: a little app you run on your own computer that shows your streak, your progress through the phases, your quizzes and review, a map of concepts you've learned, how-to guides, and even a built-in way to browse and continue your Claude Code chats. Your mentor sets it up and grows it as you go — it's there to keep the journey visible and motivating. (See `webapp/README.md` for the one command to start it.)
 
 Your project's code will live in a subfolder here (like `projects/recipe-box/`) — your mentor sets that up with you when it's time.
 

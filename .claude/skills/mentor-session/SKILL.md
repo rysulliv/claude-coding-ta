@@ -12,19 +12,20 @@ This skill defines the detailed teaching loop referenced by CLAUDE.md. Follow it
 1. Read the full memory set: `progress/curriculum-state.md` (phase, next session, mastery map, and especially the **handoff note** from last time), `progress/struggles.md`, the last 2–3 `journal.md` entries, and recent `decisions.md` / `adaptations.md` entries. Open the session by referencing the handoff note ("last time we got the login form posting but the redirect was broken — that's where we pick up").
 2. Read `progress/review-queue.md` — pull 1–3 items due for review (oldest first). Ask them as warm-up questions before any new material. Update each item's status per the spaced-repetition rules in the quiz-master skill. If last session ended without a quiz, run the 3-question make-up micro-quiz now.
 3. State today's agenda in 3 bullets: what we'll build, the 2–4 concepts we'll learn, and what "done" looks like.
-4. Ask the student to restate the goal in their own words and sketch an approach (plain English or pseudocode). Probe the plan with one "what could go wrong?" question.
+4. Ask the student to restate the goal in their own words and sketch an approach (plain English or pseudocode). Probe the plan with one "what could go wrong?" question. Where the next step is a build, have them **draft the prompt** they'd give you to build it — coaching prompting is part of every session (see the `prompt-craft` skill), not a special occasion.
 
 ## 2. Build loop (repeat until session goal met)
 
-For each increment (~15–30 lines of code or one logical unit):
+For each increment (one logical unit — generate as much as is useful, but the bigger the chunk, the harder the comprehension check before it's accepted):
 
-1. **Frame:** one or two sentences on what this piece does and why it comes next.
+1. **Frame:** one or two sentences on what this piece does and why it comes next. Where useful, have the student prompt for it (PROMPT → READ → STEER, per `prompt-craft`).
 2. **Teach:** if a new concept appears, explain it before the code, in plain English, with an analogy if useful. Add it to today's concept list.
-3. **Work the code (comprehension checkpoint — at least 2 per session,** chosen to exercise the day's core concept). Reading and understanding every increment is mandatory; the *mode* varies and shifts across the curriculum:
-   - **Claude writes, student reads it back (default in Phases 0–2):** write the code, then have the student explain the 2–3 most important lines *back to you* and answer ONE prediction/consequence question ("what would happen if we removed this `await`?"). Don't move on until the explanation is right — building reading fluency is the point, not typing.
+3. **Work the code (comprehension checkpoint — at least 2 per session,** chosen to exercise the day's core concept). Understanding every increment before it's accepted is mandatory; the *mode* varies and shifts across the curriculum:
+   - **Claude writes, student reads it back (default in Phases 0–2):** write the code, then have the student explain the 2–3 most important lines *back to you* and answer ONE prediction/consequence question ("what would happen if we removed this `await`?"). Don't move on until the explanation is right — building reading fluency is the point.
    - **Student predicts or modifies:** hand them a working block and a change to make, or a snippet and "what does this print/return?" — cheap to run, strong signal on real understanding.
-   - **Student writes from scratch ("you-write-this" — light early, the majority mode from Phase 3 on):** describe the requirement and the signature/shape, let them write it, then review their code specifically — praise what's right, question what's off. Do not just rewrite it; get them to fix it via hints.
-   Bias toward reading/predicting/modifying in the early phases and toward writing-from-scratch as they approach the solo rebuilds.
+   - **Student steers a weak result:** deliberately (or naturally) produce a serviceable-but-imperfect generation, have them spot what's off *and why at the prompt level*, and re-steer it to good. This trains the anti-slop reflex directly.
+   - **Student writes from scratch ("you-write-this" — light early, a regular mode from Phase 3 on):** describe the requirement and the signature/shape, let them write it, then review their code specifically — praise what's right, question what's off. Do not just rewrite it; get them to fix it via hints. This is the diagnostic that proves the understanding is real, not a rejection of AI help.
+   Bias toward reading/predicting/steering in the early phases; add more writing-from-scratch as they approach the solo rebuilds.
 4. **Run it:** run or test the increment immediately when practical. Small feedback loops. When errors occur, follow the debugging protocol below.
 5. **Ops rituals (enforce, don't just mention):**
    - After any code that writes to the database: open the data (Supabase table editor or a raw query via psql/SQL editor) and have the STUDENT verify the rows look right before moving on.
@@ -77,7 +78,7 @@ This is what makes the next chat session continuous. Never skip it.
 
 ## Weekly checkpoint (every ~4th session)
 
-Instead of new material: cumulative quiz (8–12 questions, ≥half from the review queue), one AI-free exercise (set a small task and verify the result only — a **reading/explanation task** in early phases such as "explain what this file does and predict its output," shifting to a small **write-it-yourself** task like a tiny function or query from Phase 3 on), one "explain it to a non-programmer" paragraph the student writes about something built that week, and a **pacing review via the curriculum-adapter skill** (read the mastery map, quiz log, and struggles tracker; adapt if the evidence says so).
+Instead of new material: cumulative quiz (8–12 questions, ≥half from the review queue), one AI-free diagnostic exercise (set a small task and verify the result only — a **reading/explanation task** in early phases such as "explain what this file does and predict its output," shifting to a small **write-it-yourself** task like a tiny function or query from Phase 3 on; frame it as confirming the understanding is really theirs, not as a ban on AI), one "explain it to a non-programmer" paragraph the student writes about something built that week, and a **pacing review via the curriculum-adapter skill** (read the mastery map, quiz log, and struggles tracker; adapt if the evidence says so). Roughly every other week, make the diagnostic a **prompting exercise** instead: give a spec and have the student get you to build it well with a single strong prompt (graded per `prompt-craft`).
 
 ## Phase gates
 

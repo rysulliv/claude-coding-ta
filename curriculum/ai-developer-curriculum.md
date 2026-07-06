@@ -2,9 +2,9 @@
 
 **Audience:** An 18-year-old with little/no coding background who wants to build real AI-powered applications — not toy exercises.
 **Duration:** ~22 weeks at 8–12 hours/week (flexible; phases gate on competence, not calendar).
-**North star:** Every phase ends with something deployed that a real person (friend or family) actually uses. Understanding is enforced, not assumed — every session ends with a walkthrough and a quiz, and you can't move on until you can explain what was built.
+**North star:** Every phase ends with something deployed that a real person (friend or family) actually uses — built *fast*, the way real developers build now: with AI doing much of the typing. This is a course in **grounded vibe coding**. You'll vibe-code real apps at speed, and — this is the whole point — you'll understand, read, debug, and steer every line that ships. Understanding is enforced, not assumed: every session ends with a walkthrough and a quiz, and you can't move on until you can explain what was built. The graduate is an excellent vibe coder who never ships slop.
 
-**What matters most (priority order):** (1) deeply understanding programming and systems concepts — APIs, authentication, backend vs. frontend, databases and queries, caching, concurrency and race conditions, security across the frontend↔backend boundary, and keeping code modular (no mega-files); (2) being able to **read and explain any code in the project** — yours, the mentor's, or a library's. Writing non-trivial code unaided is a real goal too, but it's trained *progressively*: lighter in the early phases, ramping up to the solo rebuilds in Phases 3–4. Early on, reading, predicting, and modifying code matters more than writing it from a blank file.
+**What matters most (priority order):** (1) deeply understanding programming and systems concepts — APIs, authentication, backend vs. frontend, databases and queries, caching, concurrency and race conditions, security across the frontend↔backend boundary, and keeping code modular (no mega-files); (2) being able to **read and explain any code in the project** — yours, the mentor's, or a library's; (3) being able to **prompt and steer the AI to produce senior-quality work** — decompose the task, give the right context, spot slop and reject it, turn a weak result into a strong one. Writing non-trivial code unaided is a real goal too, trained *progressively* as a **diagnostic** (proof the understanding is real, and that you could work without a net if the AI got stuck): lighter in the early phases, ramping up toward the solo rebuilds in Phases 3–4. Early on, reading, predicting, steering, and modifying code matters more than writing it from a blank file.
 
 ---
 
@@ -35,7 +35,7 @@
 Five phases. Each phase = one shipped project + a defined concept set. Each **session** (2–3 hrs) follows the same loop, enforced by the Claude Code harness:
 
 1. **Plan** (10 min) — student states today's goal in plain English and sketches the approach before any code.
-2. **Build** (60–90 min) — pair with Claude. Claude explains as it goes; the student's core job is to **read and understand every diff** and hit the session's comprehension checkpoints — explain a block line by line, predict a snippet's output, spot a planted mistake, or modify/extend a piece. Some checkpoints are designated "you-write-this" blocks, kept light in early phases and made the majority mode by Phase 3+.
+2. **Build** (60–90 min) — pair with Claude, often prompting it to build a whole piece at once (that's the skill). Claude explains as it goes; the student's core job is to **direct the build, then read and understand every diff** and hit the session's comprehension checkpoints — explain a block line by line, predict a snippet's output, spot a planted mistake, steer a weak generation into a good one, or modify/extend a piece. Some checkpoints are designated "you-write-this" blocks, kept light in early phases and a regular mode by Phase 3+.
 3. **Walkthrough** (20 min) — trace the new code path end-to-end. Student explains it back in their own words.
 4. **Quiz** (15 min) — 5–7 questions on today's concepts: recall, code-reading ("what does this print?"), and prediction ("what happens if X fails?"). Score < 70% → misses go to the review queue and get re-tested next session.
 5. **Log** (5 min) — student writes the journal entry and the git commit message themselves.
@@ -44,7 +44,9 @@ Five phases. Each phase = one shipped project + a defined concept set. Each **se
 
 **Threads that run through every phase:**
 
-**Reading fluency (the primary skill).** Reading and explaining code is trained every session, not left to chance — most of what the mentor writes, the student reads back and narrates ("what does this line do, and what breaks if it's wrong?"). The bar is that the student can open *any* file in the project and explain what it does and why it's there. Walkthroughs, the "explain your own repo" drill, and code-reading quiz questions all serve this; writing from scratch ramps up behind it.
+**Reading fluency (the primary skill).** Reading and explaining code is trained every session, not left to chance — most of what the mentor writes (a lot, since we vibe-code), the student reads back and narrates ("what does this line do, and what breaks if it's wrong?"). This is exactly how you judge whether an AI generation is right or slop, so it's non-negotiable. The bar is that the student can open *any* file in the project and explain what it does and why it's there. Walkthroughs, the "explain your own repo" drill, and code-reading quiz questions all serve this; writing from scratch ramps up behind it.
+
+**Prompting & steering (the driver's skill).** Getting senior-quality output from AI is a taught, graded skill, run through the `prompt-craft` playbook. From session one the student drafts the prompts that drive the build, learns the levers that separate a sharp prompt from a slop-generating one (context, constraints, output shape, edge cases named up front, what *not* to do), and practices the core loop: **prompt → read the result → steer it better**. When a generation comes out weak, the mentor doesn't silently fix it — the student diagnoses *why at the prompt level* and re-steers. Roughly every other week a diagnostic exercise is a pure prompting task: "here's a spec, get the AI to build it well in one prompt."
 
 **Code structure (small, focused files).** Keeping code modular is a habit, not a one-time lesson. Whenever a file starts doing too many things, the mentor names the smell and the pair refactors it — splitting routes, services, and helpers along their seams. The recurring question is "why is this file getting long, and where are the seams to split it on?" Session 3.6 formalizes it, but the habit starts as soon as the app has more than one file.
 
@@ -115,7 +117,7 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 
 **Sessions cover:**
 - 2.1 — First API call: the Messages API, roles, system prompts. Build a CLI chatbot. *Concepts: tokens, context windows, temperature, why the model "forgets" (stateless APIs).*
-- 2.2 — Prompt engineering deliberately: instructions, examples, output formats. A/B test prompts on a real task from the app. *Concepts: few-shot, specificity, evaluating outputs.*
+- 2.2 — Prompt engineering deliberately: instructions, examples, output formats. A/B test prompts on a real task from the app. Explicitly connect it to the **prompting-your-AI-pair** skill you've been practicing since session one — same levers (context, constraints, output shape, edge cases), one aimed at a feature inside your product, the other at the AI building your product. *Concepts: few-shot, specificity, evaluating outputs, prompt-as-spec.*
 - 2.3 — Structured outputs: getting JSON reliably, validating with Pydantic, handling failures. *Concepts: schemas as contracts, retries, never trusting model output blindly.*
 - 2.4 — Streaming responses into the web UI. *Concepts: server-sent events, chunked responses, perceived latency.*
 - 2.5 — Tool use: give Claude a function that queries your database; build "chat with your app's data." *Concepts: the tool-use loop, function schemas, agent loops at their simplest.*
@@ -164,13 +166,13 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 
 ## Phase 4 — Understanding What You Built (Weeks 17–18)
 
-**Goal:** Fill the gaps that vibe-coding hides. Two weeks of deliberately going *down* the stack, using the student's own apps as the case study.
+**Goal:** Ground your vibe coding all the way down. Two weeks of deliberately going *down* the stack, using the student's own apps as the case study — so the layers the AI usually handles for you (the request lifecycle, the event loop, the query planner) stop being magic. This is what turns a fast vibe coder into a dangerous-good one who can debug anything.
 
 - 4.1 — What actually happens on a request: DNS → TLS → load balancer → your process. Read Railway logs like a pro. *Concepts: HTTP over the wire, status codes deeply, headers.*
 - 4.2 — Python under the hood: how imports work, virtualenvs, what `async` actually does in FastAPI. *Concepts: the event loop, blocking vs. non-blocking.*
 - 4.3 — Database internals lite: indexes (add one to your slowest query and measure), EXPLAIN, transactions. *Concepts: why the app got faster, ACID in plain English.*
 - 4.4 — Read code you didn't write: pick one dependency, read its source for an hour, present how one function works.
-- 4.5 — Solo rebuild challenge: rebuild a core slice of Phase 1's app from an empty folder, **no AI assistance**, in one sitting. This is the graduation exam for technical understanding.
+- 4.5 — Solo rebuild challenge: rebuild a core slice of Phase 1's app from an empty folder, **no AI assistance**, in one sitting. This isn't a rejection of AI — it's the diagnostic that proves the understanding is genuinely yours and that you could keep going if the AI were down. Pass it and you *know* your vibe coding is grounded. This is the graduation exam for technical understanding.
 
 ---
 
@@ -190,14 +192,17 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 
 ## Concept Ledger (what "done" looks like)
 
-By graduation the student can, without AI help: explain HTTP request/response and status codes; write and read SQL including JOINs and aggregates; design a normalized schema; write Python functions/classes with error handling; use git fluently; explain tokens, context, prompting, structured outputs, and tool use; design and build a versioned REST API and test every endpoint (including failure and attack cases) in curl/Bruno; implement full user management — email+username signup, verification, password reset, deletion, and OAuth social login — and explain hashing/JWTs/RLS/CORS; explain and apply caching (what to cache, TTLs, and the invalidation problem, including HTTP caching/ETags); reason about concurrency and race conditions (the lost update, database transactions, optimistic locking, and idempotency); structure a codebase into small, focused modules and articulate the seams they split on; write basic tests; deploy and debug a production app; integrate payments via webhooks; connect to and query a production database to verify data; read server logs to triage whether a failure is code, data, or config; debug systematically from an error message with no AI help; and — most importantly — **read any file in their own codebase and explain what it does and why it's there.**
+By graduation the student can, without AI help: explain HTTP request/response and status codes; write and read SQL including JOINs and aggregates; design a normalized schema; write Python functions/classes with error handling; use git fluently; explain tokens, context, prompting, structured outputs, and tool use; design and build a versioned REST API and test every endpoint (including failure and attack cases) in curl/Bruno; implement full user management — email+username signup, verification, password reset, deletion, and OAuth social login — and explain hashing/JWTs/RLS/CORS; explain and apply caching (what to cache, TTLs, and the invalidation problem, including HTTP caching/ETags); reason about concurrency and race conditions (the lost update, database transactions, optimistic locking, and idempotency); structure a codebase into small, focused modules and articulate the seams they split on; write basic tests; deploy and debug a production app; integrate payments via webhooks; connect to and query a production database to verify data; read server logs to triage whether a failure is code, data, or config; debug systematically from an error message with no AI help; **prompt and steer an AI pair to produce senior-quality code — naming constraints and edge cases, spotting slop, and iterating a weak result into a strong one**; and — most importantly — **read any file in their own codebase and explain what it does and why it's there.**
 
-## Rules of Engagement (anti-vibe-coding, enforced by the harness)
+## Rules of Engagement (grounded vibe coding, enforced by the harness)
 
-1. No code is committed until the student explains the diff out loud/in writing.
-2. Claude never writes more than ~30 lines without pausing to explain and check understanding.
-3. Every session has at least 2 **comprehension checkpoints** — read-and-explain, predict-the-output, spot-the-bug, or modify — including some "you-write-this" blocks (kept light in early phases, the majority mode from Phase 3 on).
-4. Reading is the primary skill: the student can open any file in the project and explain what it does and why.
-5. Quizzes are not optional; failed concepts recycle via spaced repetition until passed twice.
-6. One AI-free exercise per week, minimum (reading/explanation early, write-it-yourself later).
-7. "It works" is never the finish line — "I can explain why it works" is.
+The point isn't to slow down the AI — it's to make sure the person driving it understands what ships. Build as fast as you like; these gates keep it from becoming slop.
+
+1. No code is committed until the student explains the diff out loud/in writing. Generate freely; ship nothing you can't explain.
+2. The AI can write whole chunks at once — but the student directs each one (ideally with a prompt they wrote), and every chunk gets a comprehension checkpoint before it's accepted. The bigger the generation, the harder the read-back.
+3. Every session has at least 2 **comprehension checkpoints** — read-and-explain, predict-the-output, spot-the-bug, steer-the-weak-result, or modify — including some "you-write-this" blocks (kept light in early phases, a regular mode from Phase 3 on).
+4. Reading is a primary skill: the student can open any file in the project and explain what it does and why.
+5. Prompting is a primary skill: the student drafts the prompts that drive the build, catches slop, and re-steers weak output (graded via `prompt-craft`).
+6. Quizzes are not optional; failed concepts recycle via spaced repetition until passed twice.
+7. One AI-free **diagnostic** exercise per week, minimum (reading/explanation early, write-it-yourself later) — to prove the understanding is real, not to ban the AI.
+8. "It works" is never the finish line — "I can explain why it works, and I could debug it if it broke" is.
