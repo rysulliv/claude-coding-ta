@@ -21,12 +21,16 @@
 | Terminal & environment | — | |
 | Python fundamentals | — | |
 | Git & workflow | — | |
-| HTTP & web concepts | — | |
+| HTTP & web concepts (frontend vs. backend) | — | |
 | SQL & data modeling | — | |
 | FastAPI & backend patterns | — | |
 | AI APIs (prompts, structured output, tools) | — | |
 | API design & testing (REST, curl/Bruno) | — | |
 | Auth, user management & security | — | |
+| Caching & performance | — | |
+| Concurrency & race conditions | — | |
+| Code organization & structure (small files) | — | |
+| Reading & explaining code | — | |
 | Testing & debugging | — | |
 | Deployment & operations | — | |
 

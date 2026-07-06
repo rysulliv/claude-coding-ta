@@ -6,10 +6,10 @@ deployed app that other people actually use, and by the end you'll understand
 every line of it.
 
 It works by turning Claude Code into a patient senior engineer who pairs with
-you: it teaches in small steps, makes you write the important code yourself,
-quizzes you so things actually stick, and refuses to just "vibe-code" the app
-for you. That refusal is the point — the goal is that *you* become the developer,
-not that an app gets built.
+you: it teaches in small steps, makes sure you understand and can read every
+line before it moves on, quizzes you so things actually stick, and refuses to
+just "vibe-code" the app for you. That refusal is the point — the goal is that
+*you* become the developer, not that an app gets built.
 
 ## What you'll do
 
@@ -69,8 +69,9 @@ Every session follows the same loop, on purpose:
 2. **Plan** — you say today's goal in your own words and sketch the approach
    before any code gets written.
 3. **Build in small steps** — never a giant wall of generated code. New
-   concepts get named and explained in plain English, and you write the key
-   parts yourself ("you type this" blocks).
+   concepts get named and explained in plain English, and your job is to
+   *understand every line* — reading it back, predicting what it does, and
+   modifying it (and writing more of it yourself as you go).
 4. **Walk through it** — you trace how the code actually runs, out loud.
 5. **Quiz** — a short quiz so today's concepts stick; the ones that don't come
    back later via spaced repetition.

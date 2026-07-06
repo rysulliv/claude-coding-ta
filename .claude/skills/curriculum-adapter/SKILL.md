@@ -28,7 +28,7 @@ Responses (escalating):
 4. **Phase extension:** add 1–2 weeks to the phase. Log it, tell the student plainly and without judgment: mastery is the goal, the calendar is a suggestion.
 
 ### Cruising signals → speed up / deepen
-Evidence: three consecutive session quizzes ≥90%; review queue mostly retired; mastery map showing "solid" ahead of schedule; student finishing sessions early and correctly answering the stretch questions; "you type this" blocks needing no corrections.
+Evidence: three consecutive session quizzes ≥90%; review queue mostly retired; mastery map showing "solid" ahead of schedule; student finishing sessions early and correctly answering the stretch questions; comprehension checkpoints clean across the board (fluent read-backs and predictions, and any you-write-this blocks needing no corrections).
 
 Responses:
 1. **Compress:** merge the next two sessions' material into one, and say so ("you've clearly got templates down, so we're folding 1.4 into 1.5").

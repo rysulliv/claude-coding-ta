@@ -4,6 +4,8 @@
 **Duration:** ~22 weeks at 8–12 hours/week (flexible; phases gate on competence, not calendar).
 **North star:** Every phase ends with something deployed that a real person (friend or family) actually uses. Understanding is enforced, not assumed — every session ends with a walkthrough and a quiz, and you can't move on until you can explain what was built.
 
+**What matters most (priority order):** (1) deeply understanding programming and systems concepts — APIs, authentication, backend vs. frontend, databases and queries, caching, concurrency and race conditions, security across the frontend↔backend boundary, and keeping code modular (no mega-files); (2) being able to **read and explain any code in the project** — yours, the mentor's, or a library's. Writing non-trivial code unaided is a real goal too, but it's trained *progressively*: lighter in the early phases, ramping up to the solo rebuilds in Phases 3–4. Early on, reading, predicting, and modifying code matters more than writing it from a blank file.
+
 ---
 
 ## The Tech Stack (professional, cheap, simple)
@@ -33,14 +35,18 @@
 Five phases. Each phase = one shipped project + a defined concept set. Each **session** (2–3 hrs) follows the same loop, enforced by the Claude Code harness:
 
 1. **Plan** (10 min) — student states today's goal in plain English and sketches the approach before any code.
-2. **Build** (60–90 min) — pair with Claude. Claude explains as it goes; student personally types designated "you-write-this" blocks.
+2. **Build** (60–90 min) — pair with Claude. Claude explains as it goes; the student's core job is to **read and understand every diff** and hit the session's comprehension checkpoints — explain a block line by line, predict a snippet's output, spot a planted mistake, or modify/extend a piece. Some checkpoints are designated "you-write-this" blocks, kept light in early phases and made the majority mode by Phase 3+.
 3. **Walkthrough** (20 min) — trace the new code path end-to-end. Student explains it back in their own words.
 4. **Quiz** (15 min) — 5–7 questions on today's concepts: recall, code-reading ("what does this print?"), and prediction ("what happens if X fails?"). Score < 70% → misses go to the review queue and get re-tested next session.
 5. **Log** (5 min) — student writes the journal entry and the git commit message themselves.
 
 **Weekly checkpoint:** cumulative quiz (pulls from the review queue with spaced repetition), one "explain it to a non-programmer" written summary, and one small refactor or bug-hunt exercise done *without* AI assistance.
 
-**Two threads run through every phase:**
+**Threads that run through every phase:**
+
+**Reading fluency (the primary skill).** Reading and explaining code is trained every session, not left to chance — most of what the mentor writes, the student reads back and narrates ("what does this line do, and what breaks if it's wrong?"). The bar is that the student can open *any* file in the project and explain what it does and why it's there. Walkthroughs, the "explain your own repo" drill, and code-reading quiz questions all serve this; writing from scratch ramps up behind it.
+
+**Code structure (small, focused files).** Keeping code modular is a habit, not a one-time lesson. Whenever a file starts doing too many things, the mentor names the smell and the pair refactors it — splitting routes, services, and helpers along their seams. The recurring question is "why is this file getting long, and where are the seams to split it on?" Session 3.6 formalizes it, but the habit starts as soon as the app has more than one file.
 
 **Operations literacy.** From Phase 0 onward, sessions include hands-on time in the tools around the code — because a developer who can't inspect their own database or read their own server logs is flying blind. Recurring rituals: after any write feature ships, open the data (Supabase table editor and a raw SQL query) and verify the rows actually look right; after any deploy, open Railway logs and watch a live request flow through; when anything errors in production, the *first* move is logs, not code. Specific sessions below teach each tool properly, but the habit is practiced constantly.
 
@@ -65,7 +71,7 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 - 0.3 — Python fundamentals I: variables, types, strings, f-strings, lists, dicts, loops, conditionals — learned by building a CLI "Magic 8-Ball / decision maker." *Concepts: mutability, indexing, control flow.*
 - 0.4 — Python fundamentals II: functions, arguments/returns, modules, imports, reading errors and stack traces. Refactor the CLI into functions. *Concepts: scope, DRY, the anatomy of a traceback.*
 - 0.5 — Git for real: init, add, commit, branch, push this curriculum repo to GitHub, .gitignore, why commits are small and messages matter. Then a GitLens moment: click through the history of the files you've already made. *Concepts: snapshots vs. diffs, remotes.*
-- 0.6 — First deploy: minimal FastAPI app ("family fortune cookie" — one endpoint, one HTML page), pushed to Railway. Share the URL with family. Then the first **ops tour**: open the Railway dashboard, find the deploy logs vs. runtime logs, watch a request hit the server live, add a `print`/log line and see it appear, and deliberately crash the app once to see what a stack trace looks like in production logs. *Concepts: what a server is, request/response, ports, HTTP verbs, environment variables, stdout → logs.*
+- 0.6 — First deploy: minimal FastAPI app ("family fortune cookie" — one endpoint, one HTML page), pushed to Railway. Share the URL with family. Then the first **ops tour**: open the Railway dashboard, find the deploy logs vs. runtime logs, watch a request hit the server live, add a `print`/log line and see it appear, and deliberately crash the app once to see what a stack trace looks like in production logs. Name the **frontend vs. backend** split explicitly here — the HTML page in the browser is the frontend, the FastAPI process is the backend, and they are two separate programs talking over HTTP. *Concepts: what a server is, frontend vs. backend (the two-programs model), request/response, ports, HTTP verbs, environment variables, stdout → logs.*
 - 0.7 — **First guided bug drill:** Claude plants a classic beginner bug (off-by-one or a type error) in the fortune cookie app and walks the full debugging method out loud: read the traceback bottom-up → hypothesis → add a print → confirm → fix → verify → explain root cause. *Concepts: the scientific method of debugging, tracebacks as maps not walls.*
 
 **Phase project:** the deployed fortune-cookie/decision-maker page. Trivial by design — the win is the *pipeline*: code → git → deploy → someone else's phone.
@@ -142,14 +148,15 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 - 3.4 — Accounts II, the full lifecycle: password reset flow, profile editing, changing email, and account deletion — including the grown-up question of what happens to the user's data when they delete (cascade vs. anonymize). **Optional but encouraged: social login** — add "Sign in with Google" via Supabase OAuth, and walk the redirect dance step by step (app → Google → consent → callback → session) until it's not magic. Handle the edge case: same email signs up with password AND Google. *Concepts: the OAuth authorization-code flow, redirect URIs, identity linking, why "Sign in with X" exists.*
 - 3.5 — Securing the endpoints: protect API routes with JWT bearer auth (FastAPI dependencies), enforce ownership with row-level security, and understand the difference between "who are you" and "what may you do." Then attack your own API in Bruno: no token → expect 401, expired token → 401, valid token but someone else's resource ID → 403/404, and keep those attack requests in the collection permanently as security regression tests. Finish with CORS (what it protects and how to configure it for a future separate frontend), basic rate limiting, and API keys for machine-to-machine clients. *Concepts: authn vs. authz, bearer auth, RLS, insecure direct object reference (IDOR), CORS, rate limiting, why security tests live in the collection forever.*
 
-**Block C — engineering maturity (sessions 3.6–3.11):**
-- 3.6 — Project structure at scale: routers, services, config; environment separation (dev/prod). *Concepts: separation of concerns, twelve-factor basics.*
+**Block C — engineering maturity (sessions 3.6–3.15):**
+- 3.6 — Project structure at scale: routers, services, config; environment separation (dev/prod). The formal treatment of the small-files habit practiced since Phase 1 — take the app's biggest file and split it along its seams, out loud. *Concepts: separation of concerns, cohesion vs. coupling, why mega-files rot, twelve-factor basics.*
 - 3.7 — Testing: pytest, testing routes and the AI-adjacent logic with mocks; how pytest and the Bruno collection complement each other. *Concepts: unit vs. integration tests, fixtures, why tests let you change code fearlessly.*
 - 3.8 — Migrations: evolving the schema without losing data (Alembic or Supabase migrations). *Concepts: schema versioning, backwards compatibility.*
-- 3.9 — Background work: slow AI jobs off the request path. *Concepts: queues conceptually, task status polling.*
-- 3.10 — **Solo bug drill (announced):** "there are two bugs somewhere in the auth flow and API we built — find and fix them." Timed, no help; one is an authorization hole (user A can read user B's data through the API — your Bruno attack requests should catch it), one is mundane. Results go to the mastery map. Debugging is now a graded skill, not an emergency.
-- 3.11 — Polish: error pages, loading states, empty states, mobile layout.
-- 3.12–3.14 — Build weeks: closed beta with 5–10 friends, feedback loop, fix, repeat. From here on, occasional **unannounced** bug drills: sometimes the session's code just doesn't work, and figuring out why is the session — revealed as a drill afterward.
+- 3.9 — Background work, concurrency & race conditions: move slow AI jobs off the request path, then confront what happens when two requests run at once. Reproduce a real race — two rapid submits creating duplicate rows, or two updates clobbering each other (the lost-update problem) — then fix it properly. *Concepts: queues conceptually, task status polling; concurrency vs. parallelism, race conditions, the lost update, atomicity and database transactions, optimistic locking (version columns), and idempotency (why "submit once" is a lie and how to make repeats safe).*
+- 3.10 — Caching & performance: make a slow page fast without changing what it does. When is stale data acceptable, and when is it dangerous? Cache-aside pattern, TTLs, and the hard part — **invalidation** (why "there are only two hard problems" is a joke about this). Where caches live: in-process vs. a shared store (Redis-style) vs. the HTTP layer itself — set cache headers / ETags so the *browser* stops re-fetching, tying caching back to the frontend↔backend boundary. Measure before and after. *Concepts: cache-aside, TTL, cache invalidation and staleness, cache hit/miss, where to cache (app vs. shared vs. HTTP), ETags and conditional requests, the cost of a cache-miss stampede.*
+- 3.11 — **Solo bug drill (announced):** "there are two bugs somewhere in the auth flow and API we built — find and fix them." Timed, no help; one is an authorization hole (user A can read user B's data through the API — your Bruno attack requests should catch it), one is mundane. Results go to the mastery map. Debugging is now a graded skill, not an emergency.
+- 3.12 — Polish: error pages, loading states, empty states, mobile layout.
+- 3.13–3.15 — Build weeks: closed beta with 5–10 friends, feedback loop, fix, repeat. From here on, occasional **unannounced** bug drills: sometimes the session's code just doesn't work, and figuring out why is the session — revealed as a drill afterward.
 
 **Phase exam includes:** designing a small REST API from a word problem (endpoints, methods, status codes), a security walkthrough ("attack your own API": what happens if I change the ID, drop the token, replay an expired one?), explaining the OAuth redirect flow from memory, writing a test for a given route, and a live schema migration.
 
@@ -183,13 +190,14 @@ Bugs are drawn from the classics of each phase: off-by-one and type errors early
 
 ## Concept Ledger (what "done" looks like)
 
-By graduation the student can, without AI help: explain HTTP request/response and status codes; write and read SQL including JOINs and aggregates; design a normalized schema; write Python functions/classes with error handling; use git fluently; explain tokens, context, prompting, structured outputs, and tool use; design and build a versioned REST API and test every endpoint (including failure and attack cases) in curl/Bruno; implement full user management — email+username signup, verification, password reset, deletion, and OAuth social login — and explain hashing/JWTs/RLS/CORS; write basic tests; deploy and debug a production app; integrate payments via webhooks; connect to and query a production database to verify data; read server logs to triage whether a failure is code, data, or config; debug systematically from an error message with no AI help; and — most importantly — **read any file in their own codebase and explain what it does and why it's there.**
+By graduation the student can, without AI help: explain HTTP request/response and status codes; write and read SQL including JOINs and aggregates; design a normalized schema; write Python functions/classes with error handling; use git fluently; explain tokens, context, prompting, structured outputs, and tool use; design and build a versioned REST API and test every endpoint (including failure and attack cases) in curl/Bruno; implement full user management — email+username signup, verification, password reset, deletion, and OAuth social login — and explain hashing/JWTs/RLS/CORS; explain and apply caching (what to cache, TTLs, and the invalidation problem, including HTTP caching/ETags); reason about concurrency and race conditions (the lost update, database transactions, optimistic locking, and idempotency); structure a codebase into small, focused modules and articulate the seams they split on; write basic tests; deploy and debug a production app; integrate payments via webhooks; connect to and query a production database to verify data; read server logs to triage whether a failure is code, data, or config; debug systematically from an error message with no AI help; and — most importantly — **read any file in their own codebase and explain what it does and why it's there.**
 
 ## Rules of Engagement (anti-vibe-coding, enforced by the harness)
 
 1. No code is committed until the student explains the diff out loud/in writing.
 2. Claude never writes more than ~30 lines without pausing to explain and check understanding.
-3. Every session has "you-type-this" blocks the student writes personally.
-4. Quizzes are not optional; failed concepts recycle via spaced repetition until passed twice.
-5. One AI-free exercise per week, minimum.
-6. "It works" is never the finish line — "I can explain why it works" is.
+3. Every session has at least 2 **comprehension checkpoints** — read-and-explain, predict-the-output, spot-the-bug, or modify — including some "you-write-this" blocks (kept light in early phases, the majority mode from Phase 3 on).
+4. Reading is the primary skill: the student can open any file in the project and explain what it does and why.
+5. Quizzes are not optional; failed concepts recycle via spaced repetition until passed twice.
+6. One AI-free exercise per week, minimum (reading/explanation early, write-it-yourself later).
+7. "It works" is never the finish line — "I can explain why it works" is.

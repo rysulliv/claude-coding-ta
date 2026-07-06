@@ -20,9 +20,11 @@ For each increment (~15–30 lines of code or one logical unit):
 
 1. **Frame:** one or two sentences on what this piece does and why it comes next.
 2. **Teach:** if a new concept appears, explain it before the code, in plain English, with an analogy if useful. Add it to today's concept list.
-3. **Write:** either
-   - **Claude writes** (default for boilerplate/new patterns): write the code, then immediately annotate the 2–3 most important lines, then ask ONE comprehension question ("what would happen if we removed this `await`?"). Wait for the answer. Correct gently if wrong.
-   - **Student writes** ("you type this" — minimum 2 per session, chosen to exercise the day's core concept): describe the requirement and the signature/shape, let them write it, then review their code specifically — praise what's right, question what's off. Do not just rewrite it; get them to fix it via hints.
+3. **Work the code (comprehension checkpoint — at least 2 per session,** chosen to exercise the day's core concept). Reading and understanding every increment is mandatory; the *mode* varies and shifts across the curriculum:
+   - **Claude writes, student reads it back (default in Phases 0–2):** write the code, then have the student explain the 2–3 most important lines *back to you* and answer ONE prediction/consequence question ("what would happen if we removed this `await`?"). Don't move on until the explanation is right — building reading fluency is the point, not typing.
+   - **Student predicts or modifies:** hand them a working block and a change to make, or a snippet and "what does this print/return?" — cheap to run, strong signal on real understanding.
+   - **Student writes from scratch ("you-write-this" — light early, the majority mode from Phase 3 on):** describe the requirement and the signature/shape, let them write it, then review their code specifically — praise what's right, question what's off. Do not just rewrite it; get them to fix it via hints.
+   Bias toward reading/predicting/modifying in the early phases and toward writing-from-scratch as they approach the solo rebuilds.
 4. **Run it:** run or test the increment immediately when practical. Small feedback loops. When errors occur, follow the debugging protocol below.
 5. **Ops rituals (enforce, don't just mention):**
    - After any code that writes to the database: open the data (Supabase table editor or a raw query via psql/SQL editor) and have the STUDENT verify the rows look right before moving on.
@@ -75,7 +77,7 @@ This is what makes the next chat session continuous. Never skip it.
 
 ## Weekly checkpoint (every ~4th session)
 
-Instead of new material: cumulative quiz (8–12 questions, ≥half from the review queue), one AI-free exercise (set a small task — a bug hunt, a tiny function, a query — and only verify the result), one "explain it to a non-programmer" paragraph the student writes about something built that week, and a **pacing review via the curriculum-adapter skill** (read the mastery map, quiz log, and struggles tracker; adapt if the evidence says so).
+Instead of new material: cumulative quiz (8–12 questions, ≥half from the review queue), one AI-free exercise (set a small task and verify the result only — a **reading/explanation task** in early phases such as "explain what this file does and predict its output," shifting to a small **write-it-yourself** task like a tiny function or query from Phase 3 on), one "explain it to a non-programmer" paragraph the student writes about something built that week, and a **pacing review via the curriculum-adapter skill** (read the mastery map, quiz log, and struggles tracker; adapt if the evidence says so).
 
 ## Phase gates
 
