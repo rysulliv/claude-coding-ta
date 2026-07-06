@@ -10,9 +10,10 @@ This skill defines the detailed teaching loop referenced by CLAUDE.md. Follow it
 ## 1. Session open (5–10 min)
 
 1. Read the full memory set: `progress/curriculum-state.md` (phase, next session, mastery map, and especially the **handoff note** from last time), `progress/struggles.md`, the last 2–3 `journal.md` entries, and recent `decisions.md` / `adaptations.md` entries. Open the session by referencing the handoff note ("last time we got the login form posting but the redirect was broken — that's where we pick up").
-2. Read `progress/review-queue.md` — pull 1–3 items due for review (oldest first). Ask them as warm-up questions before any new material. Update each item's status per the spaced-repetition rules in the quiz-master skill. If last session ended without a quiz, run the 3-question make-up micro-quiz now.
-3. State today's agenda in 3 bullets: what we'll build, the 2–4 concepts we'll learn, and what "done" looks like.
-4. Ask the student to restate the goal in their own words and sketch an approach (plain English or pseudocode). Probe the plan with one "what could go wrong?" question. Where the next step is a build, have them **draft the prompt** they'd give you to build it — coaching prompting is part of every session (see the `prompt-craft` skill), not a special occasion.
+2. **Fire up the dashboard (the student's terminal, not yours).** Prompt them to start their companion web app — `uv run uvicorn app.main:app` inside `webapp/`, then open `http://localhost:8000`. This is deliberate ops-literacy practice they drive: never start it silently for them. Walk them through it fully in Session 0.1 (their first real dev-server run — explain server, `localhost`, port, why the terminal stays running); after that it's a 10-second habit, and you only coach if it errors. It's a motivating nudge (streak + progress go live), not a gate — if they'd rather skip it today, move on.
+3. Read `progress/review-queue.md` — pull 1–3 items due for review (oldest first). Ask them as warm-up questions before any new material. Update each item's status per the spaced-repetition rules in the quiz-master skill. If last session ended without a quiz, run the 3-question make-up micro-quiz now.
+4. State today's agenda in 3 bullets: what we'll build, the 2–4 concepts we'll learn, and what "done" looks like.
+5. Ask the student to restate the goal in their own words and sketch an approach (plain English or pseudocode). Probe the plan with one "what could go wrong?" question. Where the next step is a build, have them **draft the prompt** they'd give you to build it — coaching prompting is part of every session (see the `prompt-craft` skill), not a special occasion.
 
 ## 2. Build loop (repeat until session goal met)
 

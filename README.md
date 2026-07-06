@@ -186,7 +186,7 @@ Your mentor reads your progress files, sees Session 0.1 is next, and begins with
 
 Every session follows the same loop, on purpose:
 
-1. **Catch up** — your mentor reads your progress files and greets you with where you left off and a couple of warm-up questions.
+1. **Catch up** — you fire up your dashboard in the terminal (your mentor reminds you), then your mentor reads your progress files and greets you with where you left off and a couple of warm-up questions.
 2. **Plan** — you say today's goal in your own words and sketch the approach before any code is written.
 3. **Build — you drive, the AI types** — often you'll prompt your mentor to build a whole piece at once (that's a real skill you're learning). New concepts get named and explained in plain English first, and your job is to *understand every line before it's accepted* — reading it back, predicting what it does, steering a weak result into a good one, and modifying it (and writing more of it yourself as you progress). Nothing gets committed that you can't explain.
 4. **Walk through it** — you trace how the code actually runs, out loud.
@@ -216,8 +216,16 @@ Don't just close the window mid-task — if you have to leave suddenly, at least
 
 ### ☀️ To start your next session
 1. Open **VS Code**. It usually reopens your project folder automatically. If not: **File → Open Recent** and pick your course folder.
-2. Open the **Claude panel** (the ✳ spark icon).
-3. Type:
+2. **Start your dashboard.** Open the integrated terminal (**Terminal → New Terminal**) and run:
+
+   ```bash
+   cd webapp
+   uv run uvicorn app.main:app
+   ```
+
+   Then open **http://localhost:8000** in your browser — that's your streak, progress, and review for the day. Leave that terminal running while you work. *(Your mentor walks you through this the very first time and reminds you each day — starting a server in the terminal is a real developer skill, so you do it yourself.)*
+3. Open the **Claude panel** (the ✳ spark icon).
+4. Type:
 
 > **continue**
 

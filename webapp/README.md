@@ -4,15 +4,15 @@ Your live dashboard for the course — streaks, progress, quizzes and review, a 
 
 ## Run it
 
-From the `webapp/` folder:
+From the `webapp/` folder, in your terminal:
 
 ```bash
-uv run uvicorn app.main:app --reload --port 8765
+uv run uvicorn app.main:app
 ```
 
-Then open **http://localhost:8765**. That's it — [uv](https://docs.astral.sh/uv/) installs the dependencies the first time automatically.
+Then open **http://localhost:8000** in your browser. That's it — [uv](https://docs.astral.sh/uv/) installs the dependencies the first time automatically. Leave that terminal running while you work; press **Ctrl+C** in it to stop the app.
 
-> Your mentor can also start it for you — just ask, "start my dashboard."
+> **You** start the dashboard yourself each day — running a dev server in the terminal is a real skill, and it's how your streak and progress stay live. Your mentor walks you through it the first time and reminds you at the start of each session. (Add `--reload` if you're editing the app's own code and want it to restart on changes.)
 
 ## What it reads
 

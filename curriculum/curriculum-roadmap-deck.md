@@ -82,6 +82,8 @@ But you'll also:
 
 <span class="pill green">THE LOOP</span>
 
+<span class="muted">First: fire up your dashboard in the terminal. Then —</span>
+
 1. **Plan** — you state the goal and draft the prompt
 2. **Build** — pair with the AI in small, understood steps
 3. **Walk through it** — you trace how the code runs, out loud
@@ -183,6 +185,8 @@ A little app that keeps the journey **visible and motivating**:
 - 🗺️ **Concept map** of what you've learned
 - 📖 How-to guides & mockups of your app
 - 💬 A built-in **Claude Code client** — browse & continue your sessions
+
+<span class="muted">Start it each day in your terminal: <code>uv run uvicorn app.main:app</code> → <code>localhost:8000</code>. You run it yourself — that's a real dev skill.</span>
 
 ---
 
