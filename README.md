@@ -1,104 +1,242 @@
-# Your AI Coding Mentor — "From Zero to Shipped"
+# Claude Coding TA — Your AI Coding Mentor
 
-This is a personal coding mentor that lives inside VS Code. It's not a course you
-watch — it's a mentor you *build alongside*. You'll go from zero to a real,
-deployed app that other people actually use, and by the end you'll understand
-every line of it.
+**Go from zero coding experience to a real, deployed app that people actually use — and understand every line of it.**
 
-It works by turning Claude Code into a patient senior engineer who pairs with
-you: it teaches in small steps, makes sure you understand and can read every
-line before it moves on, quizzes you so things actually stick, and refuses to
-just "vibe-code" the app for you. That refusal is the point — the goal is that
-*you* become the developer, not that an app gets built.
+This isn't a course you watch. It's a personal mentor that lives inside your code editor and teaches you to build software the way a great senior engineer would teach a junior: in small steps, making sure you *understand and can read every line* before moving on, quizzing you so it sticks, and refusing to just "vibe-code" the app for you. The goal is that **you** become the developer.
 
-## What you'll do
+You don't need to know anything about coding, GitHub, or the command line to start. The setup below assumes you've never used any of them.
 
-- Learn the terminal, Python, git, HTTP, SQL, APIs, auth, testing, and
-  deployment — in the order you actually need them, building the whole time.
-- Ship a real project to the internet and get a real person to use it.
-- Keep a running record of what you've learned, what you decided, and what
-  tripped you up — your mentor reads this every session so it always remembers
-  where you are, even though each chat starts fresh.
+---
 
-## Day 0 — do these steps IN ORDER, before your first session
+## Table of contents
 
-Your mentor is Claude Code — it can't help until it's running. These steps get
-it talking; everything after this (git, GitHub, Python, all of it) is taught
-inside the guided sessions, so don't worry about doing more than what's below.
-Budget about 30 minutes. If you're under 18 or new to all of this, a parent or
-mentor is welcome to sit down and do this setup with you.
+1. [What you'll learn](#what-youll-learn)
+2. [The journey — all 5 phases](#the-journey--all-5-phases)
+3. [**Day 0 — Get set up (start here)**](#day-0--get-set-up-start-here)
+4. [How each session works](#how-each-session-works)
+5. [Ending each day & picking back up](#ending-each-day--picking-back-up)
+6. [What's in this repo](#whats-in-this-repo)
+7. [Troubleshooting](#troubleshooting)
 
-1. **Claude account.** You need a paid Claude subscription (Pro or Max) —
-   sign up at https://claude.ai if you don't have one. This one account
-   powers the mentor; no API key needed for Claude Code itself.
-2. **Install VS Code.** Download from https://code.visualstudio.com and
-   install with defaults. (Windows: no WSL needed to start — the mentor will
-   set up anything extra if a later phase requires it.)
-3. **Put this folder somewhere sensible.** Unzip it into a folder like
-   `Documents/learn-ai-dev`. Don't rename or move the hidden `.claude`
-   folder or `CLAUDE.md` — they're the mentor's brain. (No git needed yet —
-   you'll push this to GitHub yourself in Session 0.5, as a lesson.)
-4. **Open the folder in VS Code.** File → Open Folder → select
-   `learn-ai-dev`. Claude Code operates on the open folder, so this step is
-   what puts the mentor "inside" the curriculum.
-5. **Install the Claude Code extension.** In VS Code press Ctrl+Shift+X
-   (Cmd+Shift+X on Mac), search **"Claude Code"**, and install the one
-   published by **Anthropic**. If it doesn't appear after install, restart
-   VS Code.
-6. **Sign in.** Open the Claude panel (Spark icon), choose the Claude
-   subscription sign-in option, and complete the browser authorization.
-7. **Sanity check.** In the Claude panel type: *"Can you see the CLAUDE.md
-   and progress folder in this repo?"* If yes, the mentor is loaded.
-8. **Start.** Say: **"Let's start the curriculum."** Your mentor reads
-   `progress/curriculum-state.md`, sees Session 0.1 is next, and begins with
-   a full VS Code / Claude Code tour — including a walkthrough of the very
-   setup you just did, so you understand it rather than having just clicked
-   through it.
+---
 
-**One setting that matters:** leave edit auto-accept **OFF**. The whole point is
-that you review every change your mentor proposes before it lands — that review
-habit is half of what turns you into a real developer. If your mentor ever
-notices auto-accept is on, it'll ask you to turn it back off.
+## What you'll learn
 
-## How each session runs
+The priority isn't memorizing Python syntax — it's understanding how real software works and being able to **read and explain any code in front of you**. By the end you'll genuinely understand:
+
+- **Programming basics** — Python, functions, data, loops, errors.
+- **How the web works** — frontend vs. backend, HTTP requests, APIs.
+- **Databases** — storing data, writing queries, joining tables.
+- **AI features** — calling models, structured output, tool use.
+- **Real-world systems** — authentication, security, caching, race conditions, and how to keep code organized so files stay small and readable.
+- **Shipping & operating** — deploying to the internet, reading logs, debugging production, and taking payments.
+
+Writing code from scratch comes gradually — early on you'll mostly read, predict, and modify code; by the later phases you'll be writing whole pieces yourself.
+
+---
+
+## The journey — all 5 phases
+
+Each phase ends with something **deployed and used by a real person** (a friend or family member). The pace follows your understanding, not a calendar. Full detail for every session lives in [the curriculum](curriculum/ai-developer-curriculum.md).
+
+### [Phase 0 — Foundations & First Deploy](curriculum/ai-developer-curriculum.md#phase-0--foundations--first-deploy-weeks-12) · Weeks 1–2
+*Get a live URL on the internet within 10 days and demystify the whole pipeline.*
+- 0.1 — Your workshop: VS Code + Claude Code
+- 0.2 — Environment setup (git, Python, terminal, GitHub)
+- 0.3 — Python fundamentals I (variables, lists, loops)
+- 0.4 — Python fundamentals II (functions, reading errors)
+- 0.5 — Git for real (commits, branches, pushing)
+- 0.6 — First deploy (FastAPI → live URL; frontend vs. backend; reading logs)
+- 0.7 — First guided bug drill
+
+### [Phase 1 — Real App, Real Database](curriculum/ai-developer-curriculum.md#phase-1--real-app-real-database-weeks-36) · Weeks 3–6
+*A real app with a database that a family member uses weekly.*
+- 1.1 — Data modeling on paper
+- 1.2 — Database tour + SQL basics
+- 1.3 — Connecting Python to Postgres
+- 1.4 — Web pages with FastAPI + templates
+- 1.5 — Forms and saving data (validation)
+- 1.6 — Interactivity with HTMX
+- 1.7 — JOINs and aggregates
+- 1.8 — Deploy + production debugging
+- 1.9 — Guided bug drills (database edition)
+
+### [Phase 2 — Adding AI](curriculum/ai-developer-curriculum.md#phase-2--adding-ai-weeks-710) · Weeks 7–10
+*Your app gains genuinely useful AI features — and you understand how they work.*
+- 2.1 — First API call (talking to Claude)
+- 2.2 — Prompt engineering
+- 2.3 — Structured outputs (reliable JSON)
+- 2.4 — Streaming responses
+- 2.5 — Tool use (chat with your app's data)
+- 2.6 — Your first real API endpoint
+- 2.7 — Cost, latency, and safety
+- 2.8 — Hinted bug drill (AI edition)
+- 2.9 — Build week
+
+### [Phase 3 — A Public-Ready App: API, Users & Security](curriculum/ai-developer-curriculum.md#phase-3--a-public-ready-app-api-users--security-weeks-1116) · Weeks 11–16
+*A more ambitious app for people beyond your family — with accounts, security, and polish.*
+- 3.1 — API design (REST, status codes)
+- 3.2 — API testing (curl → Bruno)
+- 3.3 — Accounts: signup & login
+- 3.4 — Accounts: full lifecycle + "Sign in with Google"
+- 3.5 — Securing the endpoints (auth, permissions, CORS)
+- 3.6 — Project structure (keeping files small)
+- 3.7 — Testing (pytest)
+- 3.8 — Database migrations
+- 3.9 — Background work, concurrency & race conditions
+- 3.10 — Caching & performance
+- 3.11 — Solo bug drill
+- 3.12 — Polish (error pages, mobile, empty states)
+- 3.13–3.15 — Build weeks (closed beta with friends)
+
+### [Phase 4 — Understanding What You Built](curriculum/ai-developer-curriculum.md#phase-4--understanding-what-you-built-weeks-1718) · Weeks 17–18
+*Go down the stack and fill the gaps that vibe-coding hides.*
+- 4.1 — What actually happens on a request
+- 4.2 — Python under the hood (async, imports)
+- 4.3 — Database internals (indexes, transactions)
+- 4.4 — Read code you didn't write
+- 4.5 — Solo rebuild challenge (the graduation exam)
+
+### [Phase 5 — Monetization & Public Launch](curriculum/ai-developer-curriculum.md#phase-5--monetization--public-launch-weeks-1922) · Weeks 19–22+
+*Your app goes public with a payment path. Even $1 of revenue changes how you think.*
+- 5.1 — Pricing & packaging
+- 5.2 — Stripe integration (payments)
+- 5.3 — Landing page & a real domain
+- 5.4 — Analytics & monitoring
+- 5.5 — Launch to real strangers
+- 5.6 — Legal/ops basics
+- Ongoing — the operating loop
+
+---
+
+## Day 0 — Get set up (start here)
+
+Your mentor is **Claude Code**, an AI that runs inside the VS Code editor. It can't help until it's running, so these one-time steps get everything installed and connected. Budget **30–45 minutes**. You don't need to understand it all yet — the mentor re-explains every step in Session 0.1. **If you're new to all of this, a parent or mentor is welcome to sit down and do this setup with you.**
+
+Do these **in order**.
+
+### 1. Get a Claude subscription
+The mentor runs on Claude. Go to **[claude.ai](https://claude.ai)** and sign up for a **paid plan (Pro or Max)** if you don't already have one. This single account powers everything — you won't need an "API key."
+
+### 2. Create a free GitHub account
+GitHub is where code lives online — think of it as "Google Drive for code." You'll use it to get your copy of the course and to save your progress.
+- Go to **[github.com/signup](https://github.com/signup)**.
+- Enter your email, create a password, and pick a username (this is public — choose something you'd show an employer, like `firstname-lastname`).
+- Verify your email address when GitHub sends you a code.
+
+### 3. Make your own copy of the course
+You'll work in *your own* copy so you can save your progress as you go.
+- Go to the course repo: **[github.com/rysulliv/claude-coding-ta](https://github.com/rysulliv/claude-coding-ta)**.
+- Click the green **"Use this template"** button (top right) → **"Create a new repository."**
+  - *Don't see that button? Click **"Fork"** in the top-right instead — it does the same thing.*
+- Give it a name like **`my-coding-journey`**, leave the rest as-is, and click **"Create repository."**
+- You now have your own copy at `github.com/YOUR-USERNAME/my-coding-journey`. Keep this browser tab open — you'll need the link in step 6.
+
+### 4. Install VS Code
+VS Code is the editor where you'll write code and talk to your mentor.
+- Download from **[code.visualstudio.com](https://code.visualstudio.com)** and install with the default options.
+
+### 5. Install Git
+Git is the tool that downloads your repo and tracks your changes. VS Code needs it.
+- Download from **[git-scm.com/downloads](https://git-scm.com/downloads)** and install.
+- **Windows:** just click **Next** through every screen (the defaults are fine), then **Install**.
+- **Mac:** if it says Git is already installed, you're done.
+- After installing, **close and reopen VS Code** so it notices Git.
+
+### 6. Download your repo into VS Code ("cloning")
+"Cloning" means copying your online repo down to your computer.
+- On your repo page from step 3, click the green **"< > Code"** button and **copy the HTTPS link** (it ends in `.git`).
+- In VS Code, press **Ctrl+Shift+P** (Mac: **Cmd+Shift+P**) to open the Command Palette.
+- Type **`Git: Clone`**, press Enter, **paste the link**, and press Enter.
+- Choose a folder to save it in (e.g. **Documents**), then click **"Open"** when VS Code asks.
+- If a browser window pops up asking you to sign in to GitHub, click **Authorize** — this connects VS Code to your account.
+
+### 7. Install the Claude Code extension
+- In VS Code, press **Ctrl+Shift+X** (Mac: **Cmd+Shift+X**) to open the Extensions view.
+- Search for **"Claude Code"** and install the one published by **Anthropic**.
+- If it doesn't show up after installing, restart VS Code.
+
+### 8. Sign in to Claude
+- Click the **Claude icon** (a spark ✳) in the left sidebar to open the Claude panel.
+- Choose the **subscription sign-in** option and finish signing in through your browser.
+
+### 9. Check that it worked
+In the Claude panel, type this and send it:
+
+> *Can you see the CLAUDE.md and progress folder in this repo?*
+
+If Claude says yes, your mentor is loaded and ready. 🎉
+
+### 10. One setting that matters — leave auto-accept OFF
+Your mentor will suggest changes to your code as **diffs** (side-by-side "before and after"). You review and accept each one yourself. **Do not turn on "auto-accept."** Reading every change is half of how you become a real developer — if your mentor ever notices auto-accept is on, it'll ask you to turn it back off.
+
+### 11. Start!
+In the Claude panel, say:
+
+> **Let's start the curriculum.**
+
+Your mentor reads your progress files, sees Session 0.1 is next, and begins with a full tour — including a walkthrough of the very setup you just did, so you understand it instead of having just clicked through it.
+
+---
+
+## How each session works
 
 Every session follows the same loop, on purpose:
 
-1. **Catch up** — your mentor reads your progress files and greets you with
-   where you left off and a couple of warm-up questions.
-2. **Plan** — you say today's goal in your own words and sketch the approach
-   before any code gets written.
-3. **Build in small steps** — never a giant wall of generated code. New
-   concepts get named and explained in plain English, and your job is to
-   *understand every line* — reading it back, predicting what it does, and
-   modifying it (and writing more of it yourself as you go).
+1. **Catch up** — your mentor reads your progress files and greets you with where you left off and a couple of warm-up questions.
+2. **Plan** — you say today's goal in your own words and sketch the approach before any code is written.
+3. **Build in small steps** — never a giant wall of generated code. New concepts get named and explained in plain English, and your job is to *understand every line* — reading it back, predicting what it does, and modifying it (and writing more of it yourself as you progress).
 4. **Walk through it** — you trace how the code actually runs, out loud.
-5. **Quiz** — a short quiz so today's concepts stick; the ones that don't come
-   back later via spaced repetition.
-6. **Commit** — you write the commit message and summarize what changed.
-7. **Log** — your mentor updates the progress files so next session picks up
-   exactly where you stopped.
+5. **Quiz** — a short quiz so today's concepts stick; the ones that don't come back later via spaced repetition.
+6. **Commit & save** — you write the commit message, summarize what changed, and save your work (details below).
+7. **Log** — your mentor updates your progress files so next time picks up exactly where you stopped.
 
-Some sessions are **AI-free exercises** (you do it solo, your mentor only checks
-the result) and some are **bug drills** (a realistic bug gets planted and you
-practice debugging it). Both are part of the design — real developers debug and
-work independently, so you practice both deliberately.
+Some sessions are **AI-free exercises** (you work solo, your mentor only checks the result) and some are **bug drills** (a realistic bug gets planted and you practice debugging). Both are part of the design — real developers debug and work independently, so you practice both deliberately.
 
-## Every day after Day 0
+---
 
-Open the folder in VS Code and say **"continue"** — your progress files handle
-the rest. That's it.
+## Ending each day & picking back up
 
-## What's in this folder
+Your mentor has **no memory of past chats** — everything it "remembers" lives in the `progress/` files in your repo. That's why ending a session properly matters: it's how tomorrow's session knows where you left off.
 
-- `CLAUDE.md` — the rules your mentor follows every session. You can read it;
-  you don't need to edit it.
-- `.claude/skills/` — the detailed playbooks for sessions, quizzes, bug drills,
-  and adjusting pace.
-- `curriculum/ai-developer-curriculum.md` — the full 5-phase curriculum, start
-  to finish.
-- `progress/` — your mentor's memory: what you've learned, decided, and
-  struggled with, plus the review queue and quiz log. These fill in as you go.
+### 🌙 To end your day
+Before you close VS Code, tell your mentor:
 
-Your project can live in a subfolder here (like `projects/recipe-box/`) so one
-mentor governs everything. Your mentor will set that up with you when it's time.
+> **I need to stop here for today.**
+
+Your mentor will then run the **end-of-session ritual** with you:
+1. It walks you through what changed and you **write the commit message** in your own words.
+2. It **saves (commits) your work** and updates your progress files — including a "handoff note" describing exactly where you stopped.
+3. It **pushes your work to GitHub** so your copy online is up to date (and your parent/mentor can see your progress).
+
+Don't just close the window mid-task — if you have to leave suddenly, at least say *"I have to go right now"* so your mentor can write the handoff note first. That one note is what makes the next session continue smoothly instead of starting over.
+
+### ☀️ To start your next session
+1. Open **VS Code**. It usually reopens your project folder automatically. If not: **File → Open Recent** and pick your course folder.
+2. Open the **Claude panel** (the ✳ spark icon).
+3. Type:
+
+> **continue**
+
+That's it. Your mentor reads your progress files, reminds you where you left off and what you were excited or stuck on, asks a warm-up question or two, and picks the work back up. You never have to re-explain what you did last time — that's what the progress files are for.
+
+---
+
+## What's in this repo
+
+- **`CLAUDE.md`** — the rules your mentor follows every session. You can read it; you don't need to edit it.
+- **`.claude/skills/`** — the detailed playbooks for running sessions, quizzes, bug drills, and adjusting pace.
+- **[`curriculum/ai-developer-curriculum.md`](curriculum/ai-developer-curriculum.md)** — the full 5-phase curriculum, start to finish.
+- **`progress/`** — your mentor's memory: what you've learned, decided, and struggled with, plus your review queue and quiz log. These fill in as you go and are what make each session continuous.
+
+Your project's code will live in a subfolder here (like `projects/recipe-box/`) — your mentor sets that up with you when it's time.
+
+---
+
+## Troubleshooting
+
+- **"Claude can't see my files."** Make sure you opened the *folder* you cloned (File → Open Folder), not a single file, and that the Claude panel shows the repo name.
+- **VS Code says Git isn't installed.** Finish step 5, then fully quit and reopen VS Code.
+- **The "Use this template" button isn't there.** Use **"Fork"** instead — same result for our purposes.
+- **Cloning asks for a password and rejects it.** Let VS Code sign you in through the browser pop-up (click **Authorize**) rather than typing a password.
+- **Something else is stuck.** Ask your mentor — describe what you clicked and paste any error message. Learning to ask a good question with the exact error is a real developer skill, and it's happy to help.
