@@ -2,7 +2,7 @@
 
 **Go from zero coding experience to a real, deployed app that people actually use — and understand every line of it.**
 
-> 📊 **Start here — the visual roadmap:** **[View the course roadmap slides (PDF)](curriculum/curriculum-roadmap.pdf)**. It maps out the whole journey at a glance. Open it in your browser (click the link on GitHub) or any PDF viewer. **Skim it first** to see the big picture, then keep it handy and revisit the slides for each phase as you reach it — it pairs with the step-by-step [Day 0 setup](#day-0--get-set-up-start-here) below.
+> 📊 **Start here — the visual roadmap:** **[View the course roadmap slides](https://rysulliv.github.io/claude-coding-ta/curriculum-roadmap.pdf)**. It maps out the whole journey at a glance and opens right in your browser. **Skim it first** to see the big picture, then keep it handy and revisit the slides for each phase as you reach it — it pairs with the step-by-step [Day 0 setup](#day-0--get-set-up-start-here) below. *(Also in this repo at [`docs/curriculum-roadmap.pdf`](docs/curriculum-roadmap.pdf).)*
 
 This isn't a course you watch. It's a personal mentor that lives inside your code editor and teaches you to build software the way a great senior engineer would teach a junior: in small steps, making sure you *understand and can read every line* before moving on, quizzing you so it sticks, and refusing to just "vibe-code" the app for you. The goal is that **you** become the developer.
 
