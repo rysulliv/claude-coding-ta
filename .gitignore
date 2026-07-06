@@ -1,0 +1,13 @@
+# OS / editor junk
+.DS_Store
+Thumbs.db
+*.swp
+.vscode/*
+!.vscode/extensions.json
+
+# Local Claude Code settings (keep skills + curriculum, ignore local state)
+.claude/settings.local.json
+
+# Environment / secrets
+.env
+.env.*
