@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% import "_parts.html" as parts %}
+{% block title %}Claude Client{% endblock %}
+{% block heading %}Claude Code client{% endblock %}
+{% block content %}
+
+{% if not cli.ok %}
+<div class="banner warn" style="margin-bottom:16px">
+  ⚠️ The Claude Code CLI isn't available ({{ cli.error }}). You can still browse and replay sessions, but continuing a conversation needs the <code>claude</code> command on your PATH.
+</div>
+{% endif %}
+
+<div class="card" style="margin-bottom:16px">
+  <div class="flex" style="justify-content:space-between;flex-wrap:wrap;gap:10px">
+    <div class="flex" style="gap:8px">
+      <span class="pill {{ 'green' if cli.ok else 'gray' }}">{{ '● CLI ready' if cli.ok else '○ CLI offline' }}</span>
+      {% if session_id %}<span class="pill violet">resuming {{ session_id[:8] }}…</span>
+      {% else %}<span class="pill gray">new session</span>{% endif %}
+    </div>
+    <div class="flex" style="gap:8px">
+      <label class="muted" style="font-size:.82rem">Permissions
+        <select id="perm">
+          {% for m in modes %}<option value="{{ m }}" {{ 'selected' if m == 'default' }}>{{ m }}</option>{% endfor %}
+        </select>
+      </label>
+      {% if recent %}
+      <select id="pick" onchange="if(this.value) location.href='/client?session='+this.value">
+        <option value="">↩ resume a session…</option>
+        {% for s in recent %}<option value="{{ s.id }}" {{ 'selected' if s.id == session_id }}>{{ s.title|truncate(48) }}</option>{% endfor %}
+      </select>
+      {% endif %}
+    </div>
+  </div>
+  {% if session_id %}
+  <div class="muted" style="font-size:.78rem;margin-top:8px">Heads up: if this session is also open in VS Code, continuing here writes to the same history. Use a fresh session, or the <code>fork</code> toggle below, to avoid clobbering.</div>
+  {% endif %}
+</div>
+
+<div id="transcript">
+  {% if transcript %}
+    {% for m in transcript.messages %}
+      <div class="msg {{ m.role }}"><div class="avatar">{{ '🧑' if m.role == 'user' else '✳️' }}</div>
+        <div class="bubble">{{ parts.render_parts(m.parts) }}</div></div>
+    {% endfor %}
+  {% else %}
+    <div class="empty" id="empty"><div class="big">✳️</div>
+      {% if session_id %}Continue the conversation below.{% else %}Start a new Claude Code conversation — type a message to begin.{% endif %}</div>
+  {% endif %}
+</div>
+
+<div class="composer">
+  <form id="composer" onsubmit="return false">
+    <textarea id="msg" placeholder="Message Claude Code…  (Enter to send, Shift+Enter for newline)" {{ 'disabled' if not cli.ok }}></textarea>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <label class="muted" style="font-size:.72rem"><input type="checkbox" id="fork"> fork</label>
+      <button class="btn" id="send" {{ 'disabled' if not cli.ok }}>Send ▸</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>window.MENTOR_SESSION_ID = {{ session_id|tojson }};</script>
+<script src="/static/js/client.js"></script>
+<style>.bubble-text { white-space: pre-wrap; }</style>
+{% endblock %}

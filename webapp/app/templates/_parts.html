@@ -1,0 +1,15 @@
+{% macro render_parts(parts) -%}
+  {%- for p in parts -%}
+    {%- if p.kind == 'text' -%}
+      <div class="bubble-text">{{ p.text }}</div>
+    {%- elif p.kind == 'thinking' -%}
+      <details class="tool"><summary class="muted">💭 thinking</summary>{{ p.text }}</details>
+    {%- elif p.kind == 'tool_use' -%}
+      <div class="tool">🔧 <strong>{{ p.name }}</strong>{% if p.input %} · <span class="muted">{{ p.input|tojson|truncate(160) }}</span>{% endif %}</div>
+    {%- elif p.kind == 'tool_result' -%}
+      <div class="tool result {{ 'err' if p.is_error }}">{{ p.text|truncate(1200) }}</div>
+    {%- elif p.kind == 'image' -%}
+      <div class="tool">🖼️ image</div>
+    {%- endif -%}
+  {%- endfor -%}
+{%- endmacro %}

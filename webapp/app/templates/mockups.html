@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Mockups{% endblock %}
+{% block heading %}App mockups{% endblock %}
+{% block content %}
+<div class="card" style="margin-bottom:18px">
+  <div class="sub" style="margin:0">Visual mockups of the app you're building. Your mentor drops new screens in here as your project takes shape — a picture of where you're headed before you build it.</div>
+</div>
+{% if mockups %}
+<div class="grid cols-2">
+  {% for m in mockups %}
+    <div class="card">
+      <img src="{{ m.src }}" alt="{{ m.name }}" style="width:100%;border-radius:12px;border:1px solid var(--line)">
+      <h2 style="margin-top:14px">🎨 {{ m.name }}</h2>
+      {% if m.caption %}<div class="muted" style="font-size:.9rem">{{ m.caption }}</div>{% endif %}
+    </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card"><div class="empty"><div class="big">🎨</div>No mockups yet — these appear as you and your mentor design your app.</div></div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Dashboard{% endblock %} · Mentor Kit</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚀</text></svg>">
+  <script>
+    // apply saved theme before paint to avoid a flash
+    (function(){ var t = localStorage.getItem('theme'); if (t) document.documentElement.setAttribute('data-theme', t); })();
+  </script>
+</head>
+<body>
+{% set path = request.url.path %}
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><span class="logo">🚀</span> Mentor Kit</div>
+    <nav class="nav">
+      <a href="/" class="{{ 'active' if path == '/' }}"><span class="ico">🏠</span> Dashboard</a>
+      <a href="/tracker" class="{{ 'active' if path.startswith('/tracker') }}"><span class="ico">🗺️</span> Roadmap</a>
+      <a href="/reviews" class="{{ 'active' if path.startswith('/reviews') }}"><span class="ico">🧠</span> Review
+        {% if nav_due %}<span class="badge">{{ nav_due }}</span>{% endif %}</a>
+      <a href="/concepts" class="{{ 'active' if path.startswith('/concepts') }}"><span class="ico">🔗</span> Concepts</a>
+      <a href="/guides" class="{{ 'active' if path.startswith('/guides') }}"><span class="ico">📖</span> Guides</a>
+      <a href="/mockups" class="{{ 'active' if path.startswith('/mockups') }}"><span class="ico">🎨</span> Mockups</a>
+      <a href="/sessions" class="{{ 'active' if path.startswith('/sessions') }}"><span class="ico">💬</span> Sessions</a>
+      <a href="/client" class="{{ 'active' if path.startswith('/client') }}"><span class="ico">✳️</span> Claude Client</a>
+    </nav>
+    <div class="sidebar-foot">
+      <div class="flex" style="justify-content:space-between">
+        <div>
+          <div class="eyebrow">Level {{ profile.level }}</div>
+          <div class="muted" style="font-size:.8rem">{{ profile.xp }} XP</div>
+        </div>
+        <div class="ring" style="--p: {{ profile.level_pct }}; width:56px;height:56px">
+          <div class="inner" style="width:44px;height:44px"><div class="lvl" style="font-size:1rem">{{ profile.level }}</div></div>
+        </div>
+      </div>
+      <div class="bar mt" style="margin-top:10px"><span style="width: {{ profile.level_pct }}%"></span></div>
+      <div class="muted" style="font-size:.72rem;margin-top:6px">{{ profile.to_next }} XP to level {{ profile.level + 1 }}</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="topbar">
+      <h1 style="margin:0">{% block heading %}{% endblock %}</h1>
+      <span class="spacer"></span>
+      <span class="chip flame" title="Day streak">🔥 <span class="big">{{ profile.streak.current }}</span> <span class="lbl">day{{ '' if profile.streak.current == 1 else 's' }}</span></span>
+      <span class="chip xp" title="Total XP">⚡ <span class="big">{{ profile.xp }}</span> <span class="lbl">XP</span></span>
+      <button class="icon-btn" onclick="toggleTheme()" title="Toggle light/dark" aria-label="Toggle theme">🌓</button>
+    </div>
+    {% block content %}{% endblock %}
+  </main>
+</div>
+<script src="/static/js/app.js"></script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

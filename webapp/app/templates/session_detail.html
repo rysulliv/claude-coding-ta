@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% import "_parts.html" as parts %}
+{% block title %}Session{% endblock %}
+{% block heading %}{% endblock %}
+{% block content %}
+<a href="/sessions" class="muted" style="font-size:.85rem">← All sessions</a>
+{% if not session %}
+  <div class="card mt"><div class="empty"><div class="big">🤷</div>Session not found.</div></div>
+{% else %}
+<div class="card mt" style="margin-top:12px">
+  <div class="flex" style="justify-content:space-between">
+    <div>
+      <h2 style="margin:0">{{ session.meta.title }}</h2>
+      <div class="muted" style="font-size:.82rem">{{ session.messages|length }} messages · {{ session.meta.updated }}{% if session.cwd %} · <code>{{ session.cwd }}</code>{% endif %}</div>
+    </div>
+    <a class="btn" href="/client?session={{ session.id }}">Continue this session →</a>
+  </div>
+</div>
+
+<div class="mt">
+  {% for m in session.messages %}
+    <div class="msg {{ m.role }}">
+      <div class="avatar">{{ '🧑' if m.role == 'user' else '✳️' }}</div>
+      <div class="bubble">{{ parts.render_parts(m.parts) }}</div>
+    </div>
+  {% endfor %}
+</div>
+{% endif %}
+{% endblock %}
+{% block scripts %}
+<style>.bubble-text { white-space: pre-wrap; }</style>
+{% endblock %}

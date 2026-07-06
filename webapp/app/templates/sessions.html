@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Sessions{% endblock %}
+{% block heading %}Claude Code sessions{% endblock %}
+{% block content %}
+<div class="flex" style="justify-content:space-between;margin-bottom:16px">
+  <div class="muted" style="font-size:.9rem">Your past conversations with Claude Code — browse and replay any of them.</div>
+  <div class="flex">
+    <a class="btn sm {{ 'ghost' if scope != 'project' }}" href="/sessions?scope=project">This project</a>
+    <a class="btn sm {{ 'ghost' if scope != 'all' }}" href="/sessions?scope=all">All projects</a>
+  </div>
+</div>
+
+{% if sessions %}
+<div class="card" style="padding:0;overflow:hidden">
+  {% for s in sessions %}
+  <div class="session-item">
+    <div class="msg" style="margin:0"><div class="avatar assistant" style="width:36px;height:36px">✳️</div></div>
+    <div style="flex:1;min-width:0">
+      <div class="title">{{ s.title }}</div>
+      <div class="meta">{{ s.messages }} messages · updated {{ s.updated }}{% if scope == 'all' %} · <code>{{ s.project }}</code>{% endif %}</div>
+    </div>
+    <a class="btn sm ghost" href="/sessions/{{ s.id }}">Replay</a>
+    <a class="btn sm" href="/client?session={{ s.id }}">Continue →</a>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="card"><div class="empty"><div class="big">💬</div>
+  No sessions found{{ ' for this project' if scope == 'project' }}.
+  {% if scope == 'project' %}<div class="mt"><a class="btn sm ghost" href="/sessions?scope=all">Look across all projects →</a></div>{% endif %}
+</div></div>
+{% endif %}
+{% endblock %}

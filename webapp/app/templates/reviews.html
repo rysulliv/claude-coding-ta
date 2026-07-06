@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block title %}Review{% endblock %}
+{% block heading %}Review{% endblock %}
+{% block content %}
+<div class="grid cols-3" style="margin-bottom:18px">
+  <div class="card"><div class="eyebrow">Due now</div><div class="stat">{{ due|length }}</div></div>
+  <div class="card"><div class="eyebrow">In rotation</div><div class="stat">{{ queue|length }}</div></div>
+  <div class="card"><div class="eyebrow">Quizzes taken</div><div class="stat">{{ quiz_log|length }}</div></div>
+</div>
+
+{% if due %}
+<div class="card" style="margin-bottom:18px" x-data="flash({{ due|length }})">
+  <div class="flex" style="justify-content:space-between;margin-bottom:8px">
+    <div class="eyebrow">Flashcard <span x-text="i+1"></span> / {{ due|length }}</div>
+    <div class="muted" style="font-size:.82rem">Tap the card to reveal · these are self-checks; graded quizzes happen with your mentor</div>
+  </div>
+  {% for item in due %}
+  <div class="due-card" x-show="i === {{ loop.index0 }}" x-cloak @click="flip = !flip" style="display:none">
+    <span class="pill violet">{{ item.source }}</span>
+    <div class="q">{{ item.concept }}</div>
+    <div class="muted" style="font-size:.8rem">Can you explain this out loud? Then reveal.</div>
+    <div class="a" x-show="flip" style="display:none">
+      {{ item.note or "No saved note yet — explain it in your own words, then ask your mentor to check you." }}
+    </div>
+  </div>
+  {% endfor %}
+  <div class="flex mt" style="justify-content:center;gap:10px;margin-top:16px">
+    <button class="btn ghost" @click="prev()">← Prev</button>
+    <button class="btn" @click="next()">Next →</button>
+  </div>
+</div>
+{% else %}
+<div class="card"><div class="empty"><div class="big">🎉</div>Nothing due for review. Come back after your next session.</div></div>
+{% endif %}
+
+<div class="card mt">
+  <h2>🔁 Full rotation</h2>
+  <div class="sub">Everything the spaced-repetition system is tracking.</div>
+  {% for item in queue %}
+    <div class="rowline">
+      <div class="label" style="width:auto;flex:1">{{ item.concept }}
+        {% if item.overdue %}<span class="pill violet" style="margin-left:6px">due</span>{% endif %}</div>
+      <span class="pill {{ 'green' if item.status == 'retired' else 'gray' }}">{{ item.status }}</span>
+      <span class="muted" style="font-size:.78rem;width:110px;text-align:right">🔥{{ item.streak }} · due {{ item.due }}</span>
+    </div>
+  {% else %}
+    <p class="muted">Nothing in rotation yet — missed quiz concepts land here automatically.</p>
+  {% endfor %}
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+  function flash(n){ return { i:0, flip:false, n:n,
+    next(){ this.flip=false; this.i=(this.i+1)%this.n; },
+    prev(){ this.flip=false; this.i=(this.i-1+this.n)%this.n; } }; }
+</script>
+<script defer src="/static/js/alpine.min.js"></script>
+{% endblock %}

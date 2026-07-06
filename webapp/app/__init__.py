@@ -1,0 +1,1 @@
+"""Companion dashboard application package."""

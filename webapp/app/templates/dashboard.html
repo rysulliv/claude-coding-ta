@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block heading %}
+  {% if state.student and not state.student.startswith('(') %}Hey {{ state.student }} 👋{% else %}Your journey{% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="grid cols-4">
+  <div class="card" style="grid-column: span 1; display:flex; align-items:center; gap:16px">
+    <div class="ring" style="--p: {{ profile.level_pct }}">
+      <div class="inner"><div><div class="lvl">{{ profile.level }}</div><div class="cap">level</div></div></div>
+    </div>
+    <div>
+      <div class="stat">{{ profile.xp }}<span class="unit"> XP</span></div>
+      <div class="muted" style="font-size:.82rem">{{ profile.to_next }} to next level</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">🔥 Streak</div>
+    <div class="stat">{{ profile.streak.current }}<span class="unit"> day{{ '' if profile.streak.current == 1 else 's' }}</span></div>
+    <div class="muted" style="font-size:.82rem">longest {{ profile.streak.longest }} · {% if profile.streak.active_today %}active today ✅{% else %}code today to keep it 🔥{% endif %}</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">🗺️ Roadmap</div>
+    <div class="stat">{{ overview.done_sessions }}<span class="unit"> / {{ overview.total_sessions }}</span></div>
+    <div class="bar mt" style="margin-top:10px"><span style="width: {{ overview.pct }}%"></span></div>
+    <div class="muted" style="font-size:.82rem;margin-top:6px">sessions complete</div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">🧠 Mastery</div>
+    <div class="stat">{{ state.areas_solid }}<span class="unit"> / {{ state.areas_total }}</span></div>
+    <div class="bar green mt" style="margin-top:10px"><span style="width: {{ state.mastery_score }}%"></span></div>
+    <div class="muted" style="font-size:.82rem;margin-top:6px">areas solid+</div>
+  </div>
+</div>
+
+<div class="grid cols-2 mt">
+  <div class="card">
+    <h2>📍 Where you are</h2>
+    <div class="sub">Your mentor picks up exactly here next session.</div>
+    {% if state.current_phase %}
+      <p><span class="pill violet">Phase</span> {{ state.current_phase }}</p>
+      <p><span class="pill green">Next</span> {{ state.next_session or 'TBD' }}</p>
+    {% else %}
+      <p class="muted">Start your first session with Claude Code and this fills in automatically.</p>
+    {% endif %}
+    {% if state.handoff %}
+      <div class="banner mt" style="margin-top:14px">📝 {{ state.handoff }}</div>
+    {% endif %}
+    {% if state.flags and 'none' not in state.flags.lower() %}
+      <div class="banner warn mt" style="margin-top:10px">🚩 {{ state.flags }}</div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>🧠 Due for review <span class="pill {{ 'green' if not due else 'violet' }}">{{ due|length }}</span></h2>
+    <div class="sub">Spaced repetition keeps concepts from fading.</div>
+    {% if due %}
+      {% for item in due[:5] %}
+        <div class="rowline" style="margin:8px 0">
+          <div class="label" style="width:auto;flex:1">{{ item.concept }}</div>
+          <span class="pill gray">{{ item.source }}</span>
+        </div>
+      {% endfor %}
+      <a class="btn sm mt" href="/reviews" style="margin-top:10px">Start review →</a>
+    {% else %}
+      <div class="empty"><div class="big">🎉</div>Nothing due — you're all caught up.</div>
+    {% endif %}
+  </div>
+</div>
+
+<div class="grid cols-2 mt">
+  <div class="card">
+    <h2>📈 Mastery map</h2>
+    <div class="sub">Every core area of the craft, and where you stand.</div>
+    {% for m in state.mastery %}
+      <div class="rowline">
+        <div class="label">{{ m.area }}</div>
+        <div class="bar {{ 'green' if m.pct >= 80 }}"><span style="width: {{ m.pct if m.pct else 3 }}%"></span></div>
+        <div class="lvl-tag">{{ m.level }}</div>
+      </div>
+    {% else %}
+      <p class="muted">The mastery map fills in as you complete sessions and quizzes.</p>
+    {% endfor %}
+  </div>
+
+  <div class="card">
+    <h2>📓 Recent sessions</h2>
+    <div class="sub">Your own words, from the journal.</div>
+    {% if journal %}
+      {% for e in journal %}
+        <div style="padding:10px 0; border-bottom:1px solid var(--line)">
+          <div class="flex" style="justify-content:space-between">
+            <strong>{{ e.title }}</strong><span class="muted" style="font-size:.8rem">{{ e.date }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty">Your journal entries will appear here after your first session.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

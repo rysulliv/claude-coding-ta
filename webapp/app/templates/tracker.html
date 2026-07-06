@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}Roadmap{% endblock %}
+{% block heading %}Roadmap{% endblock %}
+{% block content %}
+<div class="card" style="margin-bottom:18px">
+  <div class="flex" style="justify-content:space-between">
+    <div><div class="eyebrow">Overall progress</div>
+      <div class="stat">{{ overview.pct }}<span class="unit">%</span></div></div>
+    <div style="flex:1;max-width:520px">
+      <div class="bar"><span style="width: {{ overview.pct }}%"></span></div>
+      <div class="muted" style="font-size:.82rem;margin-top:6px">{{ overview.done_sessions }} of {{ overview.total_sessions }} sessions across {{ overview.phases|length }} phases</div>
+    </div>
+  </div>
+</div>
+
+{% for ph in overview.phases %}
+<div class="card phase {{ 'done' if ph.complete }}" style="margin-bottom:14px">
+  <div class="phase-head">
+    <div class="phase-num">{{ ph.num }}</div>
+    <div style="flex:1">
+      <h2 style="margin:0">Phase {{ ph.num }} — {{ ph.title }}</h2>
+      <div class="muted" style="font-size:.82rem">{{ ph.weeks }} · {{ ph.done_count }}/{{ ph.total }} sessions</div>
+    </div>
+    {% if ph.complete %}<span class="pill green">Complete ✓</span>
+    {% elif ph.done_count %}<span class="pill violet">{{ ph.pct }}%</span>
+    {% else %}<span class="pill gray">Not started</span>{% endif %}
+  </div>
+  <div class="bar {{ 'green' if ph.complete }}" style="margin-bottom:12px"><span style="width: {{ ph.pct }}%"></span></div>
+  <div class="sessions-row">
+    {% for s in ph.sessions %}
+      <span class="stag {{ 'done' if s.done }}" title="{{ s.title }}"><span class="dot"></span>{{ s.num }} · {{ s.title }}</span>
+    {% endfor %}
+  </div>
+</div>
+{% else %}
+<div class="empty"><div class="big">🗺️</div>Couldn't read the curriculum file.</div>
+{% endfor %}
+{% endblock %}
