@@ -11,15 +11,46 @@ from pathlib import Path
 
 @lru_cache
 def repo_root() -> Path:
-    """The course repo = the parent of the ``webapp/`` folder this file lives in.
+    """The course repo this dashboard belongs to — the folder the student cloned.
 
-    ``config.py`` is at ``<repo>/webapp/app/config.py``, so three parents up is
-    the repo root. Overridable with MENTOR_REPO_ROOT for tests / odd layouts.
+    We find it by walking up from this file looking for the course markers
+    (``CLAUDE.md`` + ``curriculum/``), so it resolves to the student's own repo
+    no matter what they named the clone or how it's nested. ``config.py`` lives at
+    ``<repo>/webapp/app/config.py``; the fixed-layout fallback (three parents up)
+    is used only if the markers can't be found. Overridable with MENTOR_REPO_ROOT.
     """
     override = os.environ.get("MENTOR_REPO_ROOT")
     if override:
         return Path(override).resolve()
-    return Path(__file__).resolve().parents[2]
+    here = Path(__file__).resolve()
+    for parent in here.parents:
+        if (parent / "CLAUDE.md").is_file() and (parent / "curriculum").is_dir():
+            return parent
+    return here.parents[2]
+
+
+def working_dir(session_id: str | None = None) -> Path:
+    """The folder Claude Code should run in for a client turn — the single source
+    of truth shared by the subprocess launcher and the UI.
+
+    - New conversation: the student's repo root (where ``CLAUDE.md`` lives, so the
+      mentor harness loads and Claude operates on their actual project).
+    - Resumed conversation: the ``cwd`` recorded in that session's transcript, so a
+      session continues in the exact folder it started in. Falls back to the repo
+      root if that folder is missing or the transcript has no ``cwd``.
+    """
+    root = repo_root()
+    if not session_id:
+        return root
+    # local import avoids a circular import at module load
+    from . import sessions
+
+    recorded = sessions.session_cwd(session_id)
+    if recorded:
+        p = Path(recorded)
+        if p.is_dir():
+            return p
+    return root
 
 
 def progress_dir() -> Path:

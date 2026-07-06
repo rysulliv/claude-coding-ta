@@ -131,6 +131,8 @@ def client(request: Request, session: str = ""):
             cli=claude_client.cli_available(),
             modes=claude_client.CLIENT_PERMISSION_MODES,
             recent=sessions.list_sessions("project")[:8],
+            working_dir=str(config.working_dir(session or None)),
+            repo_root=str(config.repo_root()),
         ),
     )
 

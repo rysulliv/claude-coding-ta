@@ -157,6 +157,20 @@ def find_session_file(session_id: str) -> Path | None:
     return None
 
 
+def session_cwd(session_id: str) -> str:
+    """The working directory recorded in a session's transcript (the folder that
+    session was running in), or "" if unknown. Used to resume a session in the
+    same place it started."""
+    path = find_session_file(session_id)
+    if not path:
+        return ""
+    for obj in _iter_lines(path):
+        cwd = obj.get("cwd")
+        if isinstance(cwd, str) and cwd:
+            return cwd
+    return ""
+
+
 def load_session(session_id: str) -> dict | None:
     """Full transcript for replay: an ordered list of display messages."""
     path = find_session_file(session_id)

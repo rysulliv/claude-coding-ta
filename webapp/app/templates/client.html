@@ -31,8 +31,9 @@
       {% endif %}
     </div>
   </div>
+  <div class="muted" style="font-size:.78rem;margin-top:8px">🗂️ Working in <code>{{ working_dir }}</code>{% if session_id and working_dir != repo_root %} <span class="pill gray" style="margin-left:4px">this session's folder</span>{% else %} <span class="pill gray" style="margin-left:4px">your repo</span>{% endif %} — Claude reads and edits files here.</div>
   {% if session_id %}
-  <div class="muted" style="font-size:.78rem;margin-top:8px">Heads up: if this session is also open in VS Code, continuing here writes to the same history. Use a fresh session, or the <code>fork</code> toggle below, to avoid clobbering.</div>
+  <div class="muted" style="font-size:.78rem;margin-top:6px">Heads up: if this session is also open in VS Code, continuing here writes to the same history. Use a fresh session, or the <code>fork</code> toggle below, to avoid clobbering.</div>
   {% endif %}
 </div>
 

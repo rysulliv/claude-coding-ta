@@ -26,7 +26,7 @@ import threading
 import uuid
 from pathlib import Path
 
-from . import config, sessions
+from . import config
 
 # Full set the engine understands. bypassPermissions is intentionally NOT
 # offered to the browser (see CLIENT_PERMISSION_MODES) — a drive-by POST to
@@ -173,20 +173,16 @@ async def stream_turn(
         permission_mode,
     ]
 
-    cwd = str(config.repo_root())
     if session_id:
         cmd += ["--resume", session_id]
         if fork:
             cmd.append("--fork-session")
-        sfile = sessions.find_session_file(session_id)
-        if sfile:
-            for obj in sessions._iter_lines(sfile):
-                if isinstance(obj.get("cwd"), str) and obj["cwd"]:
-                    cwd = obj["cwd"]
-                    break
     else:
         cmd += ["--session-id", str(uuid.uuid4())]
 
+    # single source of truth for which folder Claude runs in (see config.working_dir):
+    # the student's repo root for a new chat, the session's own folder on resume.
+    cwd = str(config.working_dir(session_id))
     if not Path(cwd).exists():
         cwd = str(config.repo_root())
 
